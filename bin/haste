@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require File.dirname(__FILE__) + '/../lib/haste'
+
+cli = Haste::CLI.new
+cli.start
