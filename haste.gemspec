@@ -5,7 +5,7 @@ spec = Gem::Specification.new do |s|
   s.name = 'haste'
   s.author = 'John Crepezzi'
   s.add_development_dependency('rspec')
-  s.add_dependency('restclient')
+  s.add_dependency('rest-client')
   s.description = 'CLI Haste Client'
   s.email = 'john.crepezzi@gmail.com'
   s.executables = 'haste'
