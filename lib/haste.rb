@@ -1,4 +1,3 @@
-require 'restclient'
 require 'json'
 
 module Haste
@@ -17,9 +16,19 @@ module Haste
 
     # Upload the and output the URL we get back
     def start
-      json = RestClient.post "#{server}/documents", input
-      data = JSON.parse(json)
-      puts "#{server}/#{data['key']}"
+      uri = URI.parse server
+      http = Net::HTTP.new uri.host, uri.port
+      response = http.post '/documents', input
+      if response.is_a?(Net::HTTPOK)
+        data = JSON.parse(response.body)
+        STDOUT.puts "#{server}/#{data['key']}"
+      else
+        STDERR.puts "failure uploading: #{res.status}"
+      end
+    rescue RuntimeError, JSON::ParserError => e
+      STDERR.puts "failure uploading: #{response.code}"
+    rescue Errno::ECONNREFUSED => e
+      STDERR.puts "failure connecting: #{e.message}"
     end
 
     private
