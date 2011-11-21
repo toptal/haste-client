@@ -1,1 +1,4 @@
 tests
+remove JSON dependency? - would involve change to API - is this a good idea?  what do we want to support moving forward?
+make streaming from STDIN to out
+display feedback from errors in console
