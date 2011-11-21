@@ -2,7 +2,7 @@ require 'json'
 
 module Haste
 
-  DEFAULT_URL = 'http://localhost:7777'
+  DEFAULT_URL = 'http://hastebin.com'
 
   class CLI
 
