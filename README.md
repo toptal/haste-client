@@ -8,7 +8,8 @@ And once the output makes it to the server, it will print the URL to STDOUT.
 
 This can be really really cool in combination with `pbcopy`, like:
 
-`cat file | haste | pbcopy`
+mac osx: `cat file | haste | pbcopy` 
+linux: `cat file | haste | xsel`
 
 after which the contents of `file` will be accessible at a URL which has been copied to your pasteboard.
 
