@@ -1,10 +1,10 @@
 # Haste Client
 
-haste-client is a simple client for uploading data to haste.  Usage is very simple, all you do it pipe data in STDIN:
+haste-client is a simple client for uploading data to haste-server.  All you do it pipe data in STDIN:
 
 `cat file | haste`
 
-And once the file makes it to the server, it will print the URL to STDOUT.
+And once the output makes it to the server, it will print the URL to STDOUT.
 
 This can be really really cool in combination with `pbcopy`, like:
 
@@ -14,11 +14,11 @@ after which the contents of `file` will be accessible at a URL which has been co
 
 ## Changing the location of your haste server
 
-By default, haste is expected to be running on `http://localhost:7777`, which I'm sure no one is doing.  You can change this by setting the value of ENV['HASTE_SERVER'] to the URL of your haste server.  You can use `alias` to make easy shortcuts if you commonly use a few hastes intermingled with each other.  To do that, you'd put something like
+By default, haste will point at `http://hastebin.com`.  You can change this by setting the value of ENV['HASTE_SERVER'] to the URL of your haste server.  You can also use `alias` to make easy shortcuts if you commonly use a few hastes intermingled with each other.  To do that, you'd put something like this into ~.bash_profile:
 
 alias work_haste="HASTE_SERVER=http://something.com haste"
 
-After which you can use `work_haste` to send hastes there.
+After which you can use `work_haste` to send hastes to that server instead.
 
 ## Author
 
