@@ -8,16 +8,18 @@ And once the output makes it to the server, it will print the URL to STDOUT.
 
 This can be really really cool in combination with `pbcopy`, like:
 
-mac osx: `cat file | haste | pbcopy` 
-linux: `cat file | haste | xsel`
+* mac osx: `cat file | haste | pbcopy` 
+* linux: `cat file | haste | xsel`
 
 after which the contents of `file` will be accessible at a URL which has been copied to your pasteboard.
 
 ## Changing the location of your haste server
 
-By default, haste will point at `http://hastebin.com`.  You can change this by setting the value of ENV['HASTE_SERVER'] to the URL of your haste server.  You can also use `alias` to make easy shortcuts if you commonly use a few hastes intermingled with each other.  To do that, you'd put something like this into ~.bash_profile:
+By default, haste will point at `http://hastebin.com`.  You can change this by setting the value of `ENV['HASTE_SERVER']` to the URL of your haste server.  You can also use `alias` to make easy shortcuts if you commonly use a few hastes intermingled with each other.  To do that, you'd put something like this into ~.bash_profile:
 
+``` bash
 alias work_haste="HASTE_SERVER=http://something.com haste"
+```
 
 After which you can use `work_haste` to send hastes to that server instead.
 
