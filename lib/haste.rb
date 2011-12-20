@@ -25,7 +25,7 @@ module Haste
         data = JSON.parse(response.body)
         STDOUT.puts "#{server}/#{data['key']}"
       else
-        STDERR.puts "failure uploading: #{res.status}"
+        STDERR.puts "failure uploading: #{response.code}"
       end
     rescue RuntimeError, JSON::ParserError => e
       STDERR.puts "failure uploading: #{response.code}"
