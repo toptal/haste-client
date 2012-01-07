@@ -23,7 +23,8 @@ module Haste
       response = http.post '/documents', input
       if response.is_a?(Net::HTTPOK)
         data = JSON.parse(response.body)
-        STDOUT.puts "#{server}/#{data['key']}"
+        method = STDOUT.tty? ? :puts : :print
+        STDOUT.send method, "#{server}/#{data['key']}"
       else
         STDERR.puts "failure uploading: #{response.code}"
       end
