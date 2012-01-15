@@ -12,8 +12,20 @@ module Haste
 
     # Pull all of the data from STDIN
     def initialize
-      @input = STDIN.readlines.join
-      @input.strip!
+      if STDIN.tty?
+        if ARGV.empty?
+          puts "No input file given"
+          exit
+        end
+        
+        file = ARGV[0]
+        abort "#{file} doesn't exist" unless File.exists?(file)
+        
+        @input = open(file).read.strip
+      else
+        @input = STDIN.readlines.join
+        @input.strip!
+      end
     end
 
     # Upload the and output the URL we get back
