@@ -8,42 +8,35 @@ module Haste
 
   class CLI
 
-    attr_reader :input
-
     # Pull all of the data from STDIN
     def initialize
       if STDIN.tty?
-        if ARGV.empty?
-          puts "No input file given"
-          exit
-        end
-        
-        file = ARGV[0]
-        abort "#{file} doesn't exist" unless File.exists?(file)
-        
-        @input = open(file).read.strip
+        abort 'No input file given' unless ARGV.length == 1
+        abort "#{file}: No such path" unless File.exists?(file = ARGV[0])
+        @input = open(file).read
       else
         @input = STDIN.readlines.join
-        @input.strip!
       end
+      # clean up
+      @input.strip!
     end
 
     # Upload the and output the URL we get back
     def start
       uri = URI.parse server
       http = Net::HTTP.new uri.host, uri.port
-      response = http.post '/documents', input
+      response = http.post '/documents', @input
       if response.is_a?(Net::HTTPOK)
         data = JSON.parse(response.body)
         method = STDOUT.tty? ? :puts : :print
         STDOUT.send method, "#{server}/#{data['key']}"
       else
-        STDERR.puts "failure uploading: #{response.code}"
+        abort "failure uploading: #{response.code}"
       end
     rescue RuntimeError, JSON::ParserError => e
-      STDERR.puts "failure uploading: #{response.code}"
+      abort "failure uploading: #{response.code}"
     rescue Errno::ECONNREFUSED => e
-      STDERR.puts "failure connecting: #{e.message}"
+      abort "failure connecting: #{e.message}"
     end
 
     private

@@ -13,6 +13,16 @@ This can be really really cool in combination with `pbcopy`, like:
 
 after which the contents of `file` will be accessible at a URL which has been copied to your pasteboard.
 
+## Making uploading file contents easier
+
+If you supply a valid file path as argument #1 to the client, it will be uploaded:
+
+``` bash
+# equivelant
+cat file | haste
+haste file
+```
+
 ## Changing the location of your haste server
 
 By default, haste will point at `http://hastebin.com`.  You can change this by setting the value of `ENV['HASTE_SERVER']` to the URL of your haste server.  You can also use `alias` to make easy shortcuts if you commonly use a few hastes intermingled with each other.  To do that, you'd put something like this into ~.bash_profile:
