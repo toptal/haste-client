@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require File.dirname(__FILE__) + '/../lib/haste'
+require 'pathname'
+path = Pathname.new(__FILE__)
+require File.expand_path(File.dirname(path.realpath) + '/../lib/haste')
 
 cli = Haste::CLI.new
 cli.start
