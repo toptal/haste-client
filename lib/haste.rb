@@ -33,7 +33,7 @@ module Haste
       else
         abort "failure uploading: #{response.code}"
       end
-    rescue RuntimeError, JSON::ParserError => e
+    rescue JSON::ParserError => e
       abort "failure uploading: #{response.code}"
     rescue Errno::ECONNREFUSED => e
       abort "failure connecting: #{e.message}"
@@ -43,7 +43,7 @@ module Haste
 
     def server
       return @server if @server
-      @server = ENV['HASTE_SERVER'] || Haste::DEFAULT_URL
+      @server = ENV['HASTE_SERVER'].dup() || Haste::DEFAULT_URL
       @server.chop! if server.end_with?('/')
       @server
     end
