@@ -43,7 +43,7 @@ module Haste
 
     def server
       return @server if @server
-      @server = ENV['HASTE_SERVER'].dup() || Haste::DEFAULT_URL
+      @server = ENV['HASTE_SERVER'].dup || Haste::DEFAULT_URL
       @server.chop! if server.end_with?('/')
       @server
     end
