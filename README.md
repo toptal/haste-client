@@ -45,6 +45,14 @@ After which you can use `work_haste` to send hastes to that server instead.
 
 If you'd like an alternative on Windows that supports functionality similar to `pbcopy`, check out Aidan Ryan's [WinHaste](https://github.com/ajryan/WinHaste) project.
 
+## Lightweight Alternative
+
+Han Boetes has contributed a simple shell-script alternative for those not interested in installing a RubyGem:
+
+``` bash
+haste(){ ( echo "% $@"; eval "$@" ) | curl -F "$@=<-" http://hastebin.com/documents|awk -F '"' '{print "http://hastebin.com/"$4}'}
+```
+
 ## Author
 
 John Crepezzi <john.crepezzi@gmail.com>
