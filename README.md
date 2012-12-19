@@ -53,6 +53,12 @@ Han Boetes has contributed a simple shell-script alternative for those not inter
 haste(){ ( echo "% $@"; eval "$@" ) | curl -F "$@=<-" http://hastebin.com/documents|awk -F '"' '{print "http://hastebin.com/"$4}'}
 ```
 
+Usage:
+
+``` bash
+haste `cat index.html
+```
+
 ## Author
 
 John Crepezzi <john.crepezzi@gmail.com>
