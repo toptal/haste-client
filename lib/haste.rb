@@ -11,8 +11,9 @@ module Haste
     # Pull all of the data from STDIN
     def initialize
       if STDIN.tty?
-        abort 'No input file given' unless ARGV.length == 1
-        abort "#{file}: No such path" unless File.exists?(file = ARGV[0])
+        file = ARGV.first
+        abort 'No input file given' unless file
+        abort "#{file}: No such path" unless File.exists?(file)
         @input = open(file).read
       else
         @input = STDIN.readlines.join
