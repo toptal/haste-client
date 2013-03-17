@@ -13,6 +13,12 @@ This can be really really cool in combination with `pbcopy`, like:
 
 after which the contents of `file` will be accessible at a URL which has been copied to your pasteboard.
 
+## Installation
+
+``` bash
+gem install haste
+```
+
 ## Support
 
 Please consider paying what you think haste-client is worth:
