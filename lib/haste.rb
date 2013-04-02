@@ -25,7 +25,13 @@ module Haste
     # Upload the and output the URL we get back
     def start
       uri = URI.parse server
-      http = Net::HTTP.new uri.host, uri.port
+      if uri.scheme =~ /^https/
+        http = Net::HTTP.new uri.host, uri.port
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      else
+        http = Net::HTTP.new uri.host, uri.port
+      end
       response = http.post '/documents', @input
       if response.is_a?(Net::HTTPOK)
         data = JSON.parse(response.body)
