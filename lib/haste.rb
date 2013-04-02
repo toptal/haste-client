@@ -26,6 +26,10 @@ module Haste
     def start
       uri = URI.parse server
       http = Net::HTTP.new uri.host, uri.port
+      if uri.scheme =~ /^https/
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
       response = http.post '/documents', @input
       if response.is_a?(Net::HTTPOK)
         data = JSON.parse(response.body)
