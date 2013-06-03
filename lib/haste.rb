@@ -1,5 +1,6 @@
 require 'json'
 require 'net/http'
+require 'net/https'
 require 'uri'
 
 module Haste
