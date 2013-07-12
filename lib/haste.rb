@@ -20,7 +20,7 @@ module Haste
         @input = STDIN.readlines.join
       end
       # clean up
-      @input.strip!
+      @input.rstrip!
     end
 
     # Upload the and output the URL we get back
