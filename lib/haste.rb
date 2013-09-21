@@ -40,7 +40,7 @@ module Haste
         abort "failure uploading: #{response.code}"
       end
     rescue JSON::ParserError => e
-      abort "failure uploading: #{response.code}"
+      abort "failure parsing response: #{e.message}"
     rescue Errno::ECONNREFUSED => e
       abort "failure connecting: #{e.message}"
     end
