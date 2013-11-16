@@ -54,6 +54,7 @@ After which you can use `work_haste` to send hastes to that server instead.
 You can also use `Haste` as a library to upload hastes:
 
 ``` ruby
+require 'haste'
 uploader = Haste::Uploader.new
 uploader.upload_raw 'this is my data' # key
 uploader.upload_path '/tmp/whaaaa' # key
