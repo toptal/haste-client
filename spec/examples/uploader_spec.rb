@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe Haste::Uploader do
 
-  let(:uploader) { base.nil? ? Haste::Uploader.new : Haste::Uploader.new(base) }
+  let(:uploader) { Haste::Uploader.new(base) }
 
   describe :upload_raw do
 
     let(:data) { 'hello world' }
-    let(:url) { "#{uploader.server_url}/documents" }
     let(:base) { nil }
     let(:error_message) do
       begin
@@ -23,7 +22,8 @@ describe Haste::Uploader do
       let(:json) { '{"key":"hello"}' }
 
       before do
-        RestClient.should_receive(:post).with(url, data).and_return(json)
+        ostruct = OpenStruct.new(:status => 200, :body => json)
+        uploader.send(:connection).should_receive(:post).with('/documents', data).and_return(ostruct)
       end
 
       it 'should get the key' do
@@ -38,7 +38,8 @@ describe Haste::Uploader do
       let(:json) { '{that:not_even_json}' }
 
       before do
-        RestClient.should_receive(:post).with(url, data).and_return(json)
+        ostruct = OpenStruct.new(:status => 200, :body => json)
+        uploader.send(:connection).should_receive(:post).with('/documents', data).and_return(ostruct)
       end
 
       it 'should get an error' do
@@ -50,12 +51,12 @@ describe Haste::Uploader do
     context 'with a 404 response' do
 
       before do
-        error = RestClient::ResourceNotFound.new
-        RestClient.should_receive(:post).with(url, data).and_raise(error)
+        ostruct = OpenStruct.new(:status => 404, :body => 'ohno')
+        uploader.send(:connection).should_receive(:post).with('/documents', data).and_return(ostruct)
       end
 
       it 'should get an error' do
-        error_message.should == 'failure uploading: Resource Not Found'
+        error_message.should == 'failure uploading: ohno'
       end
 
     end
@@ -64,7 +65,7 @@ describe Haste::Uploader do
 
       before do
         error = Errno::ECONNREFUSED
-        RestClient.should_receive(:post).with(url, data).and_raise(error)
+        uploader.send(:connection).should_receive(:post).with('/documents', data).and_raise(error)
       end
 
       it 'should get the key' do
