@@ -47,6 +47,15 @@ alias work_haste="HASTE_SERVER=http://something.com haste"
 
 After which you can use `work_haste` to send hastes to that server instead.
 
+## Use as a library
+
+You can also use `Haste` as a library to upload hastes:
+
+``` ruby
+uploader = Haste::Uploader.new
+uploader.upload_raw 'this is my data' # key
+```
+
 ## Windows Support
 
 If you'd like an alternative on Windows that supports functionality similar to `pbcopy`, check out Aidan Ryan's [WinHaste](https://github.com/ajryan/WinHaste) project.
