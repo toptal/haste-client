@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
+
 require 'pathname'
 path = Pathname.new(__FILE__)
 require File.expand_path(File.dirname(path.realpath) + '/../lib/haste')
