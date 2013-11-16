@@ -2,3 +2,4 @@
 *.swo
 *.gem
 Gemfile.lock
+.rspec
