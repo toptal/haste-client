@@ -21,14 +21,6 @@ after which the contents of `file` will be accessible at a URL which has been co
 gem install haste
 ```
 
-## Support
-
-Please consider paying what you think haste-client is worth:
-
-<a href="https://www.stripeme.com/pay/1r2f">
-  <img alt="Pay" src="https://www.stripeme.com/pay.jpg" />
-</a>
-
 ## Making uploading file contents easier
 
 If you supply a valid file path as argument #1 to the client, it will be uploaded:
