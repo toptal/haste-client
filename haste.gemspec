@@ -4,7 +4,6 @@ require File.dirname(__FILE__) + '/lib/haste/version'
 spec = Gem::Specification.new do |s|
   s.name = 'haste'
   s.author = 'John Crepezzi'
-  s.add_development_dependency('rake')
   s.add_development_dependency('rspec')
   s.add_dependency('json')
   s.add_dependency('rest-client')
