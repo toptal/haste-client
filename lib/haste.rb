@@ -16,8 +16,6 @@ module Haste
         abort 'No input file given' unless file
         abort "#{file}: No such path" unless File.exists?(file)
         @input = open(file).read
-        @user = ENV['HASTE_USER']
-        @password = ENV['HASTE_PWD']
       else
         @input = STDIN.readlines.join
       end
@@ -28,16 +26,12 @@ module Haste
     # Upload the and output the URL we get back
     def start
       uri = URI.parse server
-      post = Net::HTTP::Post.new '/documents'
-      post.body = @input
-      post.basic_auth @user, @password if @user && @password
-      response = Net::HTTP.new(uri.host, uri.port).start do |http|
-        if uri.scheme =~ /^https/
-          http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        end
-        http.request(post)
+      http = Net::HTTP.new uri.host, uri.port
+      if uri.scheme =~ /^https/
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
+      response = http.post '/documents', @input
       if response.is_a?(Net::HTTPOK)
         data = JSON.parse(response.body)
         method = STDOUT.tty? ? :puts : :print
