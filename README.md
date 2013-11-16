@@ -1,5 +1,7 @@
 # Haste Client
 
+[![Build Status](https://secure.travis-ci.org/seejohnrun/haste-client.png)](http://travis-ci.org/seejohnrun/haste-client)
+
 haste-client is a simple client for uploading data to haste-server.  All you do it pipe data in STDIN:
 
 `cat file | haste`
@@ -54,6 +56,7 @@ You can also use `Haste` as a library to upload hastes:
 ``` ruby
 uploader = Haste::Uploader.new
 uploader.upload_raw 'this is my data' # key
+uploader.upload_path '/tmp/whaaaa' # key
 ```
 
 ## Windows Support
