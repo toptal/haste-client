@@ -111,7 +111,7 @@ describe Haste::Uploader do
 
       let(:data) { 'hello world' }
       let(:path) { '/tmp/real' }
-      before { File.write(path, data) }
+      before { File.open(path, 'w') { |f| f.write(data) } }
 
       before do
         uploader.should_receive(:upload_raw).with(data) # check
