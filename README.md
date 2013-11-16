@@ -39,6 +39,15 @@ cat file | haste
 haste file
 ```
 
+## You can get the raw version
+
+Want the raw URL returned instead? (a plain-text version)?
+
+``` bash
+cat file | haste --raw # or
+haste file --raw
+```
+
 ## Changing the location of your haste server
 
 By default, haste will point at `http://hastebin.com`.  You can change this by setting the value of `ENV['HASTE_SERVER']` to the URL of your haste server.  You can also use `alias` to make easy shortcuts if you commonly use a few hastes intermingled with each other.  To do that, you'd put something like this into ~.bash_profile:

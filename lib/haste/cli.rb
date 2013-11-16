@@ -10,13 +10,18 @@ module Haste
     # And then handle the basic usage
     def start
       # Take data in
-      key = if STDIN.tty?
-        @uploader.upload_path ARGV.first
+      if STDIN.tty?
+        key = @uploader.upload_path ARGV.first
       else
-        @uploader.upload_raw STDIN.readlines.join
+        key = @uploader.upload_raw STDIN.readlines.join
+      end
+      # Put together a URL
+      if ARGV.include?('--raw')
+        url = "#{@uploader.server_url}/raw/#{key}"
+      else
+        url = "#{@uploader.server_url}/#{key}"
       end
       # And write data out
-      url = "#{@uploader.server_url}/#{key}"
       if STDOUT.tty?
         STDOUT.puts url
       else
