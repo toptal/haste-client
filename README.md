@@ -26,7 +26,7 @@ gem install haste
 If you supply a valid file path as argument #1 to the client, it will be uploaded:
 
 ``` bash
-# equivelant
+# equivalent
 cat file | haste
 haste file
 ```
