@@ -1,13 +1,15 @@
 require 'rubygems'
 require File.dirname(__FILE__) + '/lib/haste/version'
 
-spec = Gem::Specification.new do |s|
+Gem::Specification.new do |s|
   s.name = 'haste'
   s.author = 'John Crepezzi'
   s.add_development_dependency('rspec')
   s.add_dependency('json')
   s.add_dependency('faraday')
   s.description = 'CLI Haste Client'
+  s.license = 'MIT License'
+  s.homepage = 'https://github.com/seejohnrun/haste-client'
   s.email = 'john.crepezzi@gmail.com'
   s.executables = 'haste'
   s.files = Dir['lib/**/*.rb', 'haste']
