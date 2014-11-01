@@ -26,7 +26,7 @@ gem install haste
 If you supply a valid file path as argument #1 to the client, it will be uploaded:
 
 ``` bash
-# equivelant
+# equivalent
 cat file | haste
 haste file
 ```
@@ -67,16 +67,16 @@ If you'd like an alternative on Windows that supports functionality similar to `
 
 ## Lightweight Alternative
 
-Han Boetes has contributed a simple shell-script alternative for those not interested in installing a RubyGem:
+Han Boetes and @nickthename have contributed a simple shell-script alternative for those not interested in installing a RubyGem:
 
 ``` bash
-haste(){ ( echo "% $@"; eval "$@" ) | curl -F "$@=<-" http://hastebin.com/documents|awk -F '"' '{print "http://hastebin.com/"$4}'}
+haste() { a=$(cat); curl -X POST -s -d "$a" http://hastebin.com/documents | awk -F '"' '{print "http://hastebin.com/"$4}'; }
 ```
 
 Usage:
 
 ``` bash
-haste `cat index.html
+cat file.txt | haste
 ```
 
 ## Author
