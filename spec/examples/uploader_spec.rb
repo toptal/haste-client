@@ -23,12 +23,12 @@ describe Haste::Uploader do
 
       before do
         ostruct = OpenStruct.new(:status => 200, :body => json)
-        uploader.send(:connection).should_receive(:post).with('/documents', data).and_return(ostruct)
+        expect(uploader.send(:connection)).to receive(:post).with('/documents', data).and_return(ostruct)
       end
 
       it 'should get the key' do
-        error_message.should be_nil # no error
-        @key.should == 'hello'
+        expect(error_message).to be_nil # no error
+        expect(@key).to eq('hello')
       end
 
     end
@@ -39,11 +39,11 @@ describe Haste::Uploader do
 
       before do
         ostruct = OpenStruct.new(:status => 200, :body => json)
-        uploader.send(:connection).should_receive(:post).with('/documents', data).and_return(ostruct)
+        expect(uploader.send(:connection)).to receive(:post).with('/documents', data).and_return(ostruct)
       end
 
       it 'should get an error' do
-        error_message.should start_with 'failure parsing response: '
+        expect(error_message).to start_with('failure parsing response: ')
       end
 
     end
@@ -52,11 +52,11 @@ describe Haste::Uploader do
 
       before do
         ostruct = OpenStruct.new(:status => 404, :body => 'ohno')
-        uploader.send(:connection).should_receive(:post).with('/documents', data).and_return(ostruct)
+        expect(uploader.send(:connection)).to receive(:post).with('/documents', data).and_return(ostruct)
       end
 
       it 'should get an error' do
-        error_message.should == 'failure uploading: ohno'
+        expect(error_message).to eq('failure uploading: ohno')
       end
 
     end
@@ -65,11 +65,11 @@ describe Haste::Uploader do
 
       before do
         error = Errno::ECONNREFUSED
-        uploader.send(:connection).should_receive(:post).with('/documents', data).and_raise(error)
+        expect(uploader.send(:connection)).to receive(:post).with('/documents', data).and_raise(error)
       end
 
       it 'should get the key' do
-        error_message.should == 'failure connecting: Connection refused'
+        expect(error_message).to eq('failure connecting: Connection refused')
       end
 
     end
@@ -93,7 +93,7 @@ describe Haste::Uploader do
       let(:path) { nil }
 
       it 'should have an error' do
-        error_message.should == 'No input file given'
+        expect(error_message).to eq('No input file given')
       end
 
     end
@@ -103,7 +103,7 @@ describe Haste::Uploader do
       let(:path) { '/tmp/why-do-you-have-a-file-called-john' }
 
       it 'should have an error' do
-        error_message.should == "#{path}: No such path"
+        expect(error_message).to eq("#{path}: No such path")
       end
 
     end
@@ -115,11 +115,11 @@ describe Haste::Uploader do
       before { File.open(path, 'w') { |f| f.write(data) } }
 
       before do
-        uploader.should_receive(:upload_raw).with(data) # check
+        expect(uploader).to receive(:upload_raw).with(data) # check
       end
 
       it 'should not receive an error' do
-        error_message.should be_nil
+        expect(error_message).to be_nil
       end
 
     end
@@ -135,7 +135,7 @@ describe Haste::Uploader do
       let(:base) { nil }
 
       it 'should use the default url' do
-        server_url.should == Haste::DEFAULT_URL
+        expect(server_url).to eq(Haste::DEFAULT_URL)
       end
 
     end
@@ -148,11 +148,11 @@ describe Haste::Uploader do
         let(:base) { @string }
 
         it 'should remove the slash' do
-          server_url.should == @string.chop
+          expect(server_url).to eq(@string.chop)
         end
 
         it 'should not modify the original' do
-          @string.should == 'hello/'
+          expect(@string).to eq('hello/')
         end
 
       end
@@ -162,7 +162,7 @@ describe Haste::Uploader do
         let(:base) { 'hello' }
 
         it 'should not chop the url' do
-          server_url.should == base
+          expect(server_url).to eq(base)
         end
 
       end
