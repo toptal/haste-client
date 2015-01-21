@@ -1,5 +1,6 @@
 require 'json'
 require 'faraday'
+require 'uri'
 
 module Haste
 
@@ -41,7 +42,9 @@ module Haste
     private
 
     def do_post(data)
-      connection.post('/documents', data)
+      posturi= URI.parse(server_url)
+      posturi.path += '/documents'
+      connection.post(posturi.path, data)
     end
 
     def connection
