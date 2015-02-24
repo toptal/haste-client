@@ -46,9 +46,7 @@ module Haste
 
     def connection
       @connection ||= Faraday.new(:url => server_url) do |c|
-        if @server_user
-          c.basic_auth(@server_user, @server_user)
-        end
+        c.basic_auth(@server_user, @server_user) if @server_user
         c.adapter Faraday.default_adapter
       end
     end
