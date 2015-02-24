@@ -4,7 +4,11 @@ module Haste
 
     # Create a new uploader
     def initialize
-      @uploader = Uploader.new ENV['HASTE_SERVER'], ENV['HASTE_USER'], ENV['HATE_PASS']
+      @uploader = Uploader.new(
+        ENV['HASTE_SERVER'],
+        ENV['HASTE_USER'],
+        ENV['HASTE_PASS'],
+        ENV['HASTE_SSL_CERTS'])
     end
 
     # And then handle the basic usage
