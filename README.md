@@ -10,7 +10,7 @@ And once the output makes it to the server, it will print the URL to STDOUT.
 
 This can be really really cool in combination with `pbcopy`, like:
 
-* mac osx: `cat file | haste | pbcopy` 
+* mac osx: `cat file | haste | pbcopy`
 * linux: `cat file | haste | xsel`
 
 after which the contents of `file` will be accessible at a URL which has been copied to your pasteboard.
@@ -49,6 +49,16 @@ alias work_haste="HASTE_SERVER=http://something.com haste"
 ```
 
 After which you can use `work_haste` to send hastes to that server instead.
+
+### Authentication
+
+If your haste installation requires http authentication,
+add the following to your ~.bash_profile:
+
+```bash
+export HASTE_USER="myusername"
+export HASTE_PASS="mypassword"
+```
 
 ## Use as a library
 

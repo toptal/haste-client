@@ -7,9 +7,9 @@ module Haste
 
   class Uploader
 
-    attr_reader :server_url
+    attr_reader :server_url, :server_user, :server_pass
 
-    def initialize(server_url = nil)
+    def initialize(server_url = nil, server_user = nil, server_pass = nil)
       @server_url = server_url || Haste::DEFAULT_URL
       @server_url = @server_url.dup
       @server_url = @server_url.chop if @server_url.end_with?('/')
@@ -46,6 +46,9 @@ module Haste
 
     def connection
       @connection ||= Faraday.new(:url => server_url) do |c|
+        if @server_user
+          c.basic_auth(@server_user, @server_user)
+        end
         c.adapter Faraday.default_adapter
       end
     end
