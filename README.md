@@ -79,6 +79,9 @@ Usage:
 cat file.txt | haste
 ```
 
+And a more expansive BASH option by @diethnis can be found at:
+https://github.com/diethnis/standalones/blob/master/hastebin.sh
+
 ## Author
 
 John Crepezzi <john.crepezzi@gmail.com>
