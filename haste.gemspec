@@ -4,8 +4,8 @@ require File.dirname(__FILE__) + '/lib/haste/version'
 Gem::Specification.new do |s|
   s.name = 'haste'
   s.author = 'John Crepezzi'
-  s.add_development_dependency('rspec', '~> 3.0')
-  s.add_dependency('json', '~> 1.8')
+  s.add_development_dependency('rspec')
+  s.add_dependency('json')
   s.add_dependency('faraday', '~> 0.9')
   s.description = 'CLI Haste Client'
   s.license = 'MIT License'
