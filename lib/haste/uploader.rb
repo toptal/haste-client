@@ -3,7 +3,7 @@ require 'faraday'
 
 module Haste
 
-  DEFAULT_URL = 'http://hastebin.com'
+  DEFAULT_URL = 'https://hastebin.com'
 
   class Uploader
 
