@@ -126,6 +126,42 @@ describe Haste::Uploader do
 
   end
 
+  describe :post_path do
+
+    let(:post_path) { uploader.send(:post_path) }
+
+    context "when the server URL doesn't have a path" do
+
+      let(:base) { 'http://example.com/' }
+
+      it 'should return /documents' do
+        expect(post_path).to eq('/documents')
+      end
+
+    end
+
+    context "when the server URL has a path" do
+
+      let(:base) { 'http://example.com/friend' }
+
+      it 'should return /documents' do
+        expect(post_path).to eq('/friend/documents')
+      end
+
+    end
+
+    context "when the server URL has a path that ends with slash" do
+
+      let(:base) { 'http://example.com/friend/' }
+
+      it 'should return /documents appended to the path without a duplicate slash' do
+        expect(post_path).to eq('/friend/documents')
+      end
+
+    end
+
+  end
+
   describe :server_url do
 
     let(:server_url) { uploader.server_url }

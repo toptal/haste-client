@@ -41,10 +41,13 @@ module Haste
 
     private
 
+    def post_path
+      parsed_uri = URI.parse(server_url)
+      "#{parsed_uri.path}/documents"
+    end
+
     def do_post(data)
-      posturi= URI.parse(server_url)
-      posturi.path += '/documents'
-      connection.post(posturi.path, data)
+      connection.post(post_path, data)
     end
 
     def connection
