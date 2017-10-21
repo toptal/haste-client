@@ -70,13 +70,22 @@ If you'd like an alternative on Windows that supports functionality similar to `
 Han Boetes and @nickthename have contributed a simple shell-script alternative for those not interested in installing a RubyGem:
 
 ``` bash
-haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}'; }
+haste() {
+    local S="https" H="hastebin.com" P="" L="$1"
+    local SHP="${S}://${H}${P}/"
+    curl -X POST -s --data-binary @- "${SHP}documents" \
+      | awk -F '"' 'b{ b="."b }; {print a$4b}' a="${SHP}" b="${L}"
+}
 ```
+
+Where `S` is the scheme, `H` is the host, `P` is the port, and `L` is the language. Requires `curl`
 
 Usage:
 
 ``` bash
-cat file.txt | haste
+cat file.txt | haste     # cat file into hate, output url
+haste sh < script.sh     # Same as above, but ensure shell syntax highlighting 
+xsel -b | haste txt      # Output clipboard buffer into haste, ensure no highlighting  
 ```
 
 And a more expansive BASH option by @diethnis can be found at:
