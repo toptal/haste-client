@@ -2,16 +2,16 @@
 
 [![Build Status](https://secure.travis-ci.org/seejohnrun/haste-client.png)](http://travis-ci.org/seejohnrun/haste-client)
 
-haste-client is a simple client for uploading data to haste-server.  All you do it pipe data in STDIN:
+haste-client is a simple client for uploading data to haste-server.  All you do it redirect data to STDIN:
 
-`cat file | haste`
+`haste < file`
 
 And once the output makes it to the server, it will print the URL to STDOUT.
 
 This can be really really cool in combination with `pbcopy`, like:
 
-* mac osx: `cat file | haste | pbcopy`
-* linux: `cat file | haste | xsel`
+* mac osx: `haste < file | pbcopy`
+* linux: `haste < file | xsel`
 
 after which the contents of `file` will be accessible at a URL which has been copied to your pasteboard.
 
@@ -27,7 +27,7 @@ If you supply a valid file path as argument #1 to the client, it will be uploade
 
 ``` bash
 # equivalent
-cat file | haste
+haste < file
 haste file
 ```
 
@@ -36,7 +36,7 @@ haste file
 Want the raw URL returned instead? (a plain-text version)?
 
 ``` bash
-cat file | haste --raw # or
+haste < file --raw # or
 haste file --raw
 ```
 
@@ -76,7 +76,7 @@ haste() { a=$(cat); curl -X POST -s -d "$a" https://hastebin.com/documents | awk
 Usage:
 
 ``` bash
-cat file.txt | haste
+haste < file
 ```
 
 And a more expansive BASH option by @diethnis can be found at:
