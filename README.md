@@ -50,6 +50,22 @@ alias work_haste="HASTE_SERVER=https://something.com haste"
 
 After which you can use `work_haste` to send hastes to that server instead.
 
+### Authentication
+
+If your haste installation requires http authentication,
+add the following to your ~.bash_profile:
+
+```bash
+export HASTE_USER="myusername"
+export HASTE_PASS="mypassword"
+```
+
+if you are using SSL, you will need to supply your certs path
+
+```bash
+export HASTE_SSL_CERTS="/System/Library/OpenSSL/certs"
+```
+
 ## Use as a library
 
 You can also use `Haste` as a library to upload hastes:

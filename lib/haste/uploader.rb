@@ -8,12 +8,16 @@ module Haste
 
   class Uploader
 
-    attr_reader :server_url
+    attr_reader :server_url, :server_user, :server_pass, :ssl_certs
 
-    def initialize(server_url = nil)
+    def initialize(server_url = nil, server_user = nil, server_pass = nil, ssl_certs = nil)
       @server_url = server_url || Haste::DEFAULT_URL
       @server_url = @server_url.dup
       @server_url = @server_url.chop if @server_url.end_with?('/')
+
+      @server_user = server_user
+      @server_pass = server_pass
+      @ssl_certs   = ssl_certs
     end
 
     # Take in a path and return a key
@@ -51,9 +55,29 @@ module Haste
     end
 
     def connection
-      @connection ||= Faraday.new(:url => server_url) do |c|
-        c.adapter Faraday.default_adapter
+      @connection ||= connection_set
+    end
+
+    def connection_set
+      return connection_https if @ssl_certs
+      connection_http
+    end
+
+    def connection_http
+      Faraday.new(:url => server_url) do |c|
+        connection_config(c)
       end
+    end
+
+    def connection_https
+      Faraday.new(:url => server_url, :ssl => { :ca_path => @ssl_certs }) do |c|
+        connection_config(c)
+      end
+    end
+
+    def connection_config(config)
+      config.basic_auth(@server_user, @server_pass) if @server_user
+      config.adapter Faraday.default_adapter
     end
 
     def fail_with(msg)
