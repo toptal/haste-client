@@ -13,11 +13,10 @@ Describe the changes and motivations for the pull request, unless obvious from t
 
 ### Environment variables
 
-Include a snapshot of the ENV vars used in your local env when this PR was created.
-```
-PUBLIC_ENV_VAR=public-value
-GLOBAL_SECRET_ENV_VAR=xxx # Added in 1Password in Shared-Utilities-Environment group
-OWN_PRIVATE_ENV_VAR # Different for everyone
+You should add the following to your ~.bash_profile:
+
+```bash
+export ENV_VAR="value"
 ```
 
 ### Acceptance Criteria
