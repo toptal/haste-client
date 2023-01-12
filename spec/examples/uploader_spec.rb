@@ -165,13 +165,15 @@ describe Haste::Uploader do
   describe :server_url do
 
     let(:server_url) { uploader.server_url }
+    let(:share_server_url) { uploader.share_server_url }
 
     context 'with default constructor' do
 
       let(:base) { nil }
 
-      it 'should use the default url' do
-        expect(server_url).to eq(Haste::DEFAULT_URL)
+      it 'should use the default urls' do
+        expect(server_url).to eq(Haste::DEFAULT_SERVER_URL)
+        expect(share_server_url).to eq(Haste::DEFAULT_SHARE_SERVER_URL)
       end
 
     end

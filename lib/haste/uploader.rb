@@ -4,16 +4,16 @@ require 'uri'
 
 module Haste
 
-  SERVER_URL = 'https://hastebin.com'
-  SHARE_SERVER_URL = 'https://hastebin.com'
+  DEFAULT_SERVER_URL = 'https://new.hastebin.com'
+  DEFAULT_SHARE_SERVER_URL = 'https://new.hastebin.com'
 
   class Uploader
 
     attr_reader :server_url, :server_token, :share_server_url, :server_user, :server_pass, :ssl_certs
 
     def initialize(server_url = nil, server_token = nil, share_server_url = nil, server_user = nil, server_pass = nil, ssl_certs = nil)
-      @server_url = generate_url(server_url || Haste::SERVER_URL)
-      @share_server_url = generate_url(share_server_url || Haste::SHARE_SERVER_URL)
+      @server_url = generate_url(server_url || Haste::DEFAULT_SERVER_URL)
+      @share_server_url = generate_url(share_server_url || Haste::DEFAULT_SHARE_SERVER_URL)
       
       @server_user = server_user
       @server_token = server_token
