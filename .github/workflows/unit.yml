@@ -4,7 +4,8 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: [UTI-2583--adapt-haste-client-to-new-api]
+    branches: 
+      - UTI-2583--adapt-haste-client-to-new-api
 
 jobs:
   unit_tests:
