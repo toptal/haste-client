@@ -6,6 +6,8 @@ module Haste
     def initialize
       @uploader = Uploader.new(
         ENV['HASTE_SERVER'],
+        ENV['HASTE_SERVER_TOKEN'],
+        ENV['HASTE_SHARE_SERVER'],
         ENV['HASTE_USER'],
         ENV['HASTE_PASS'],
         ENV['HASTE_SSL_CERTS'])
@@ -20,11 +22,7 @@ module Haste
         key = @uploader.upload_raw STDIN.readlines.join
       end
       # Put together a URL
-      if ARGV.include?('--raw')
-        url = "#{@uploader.server_url}/raw/#{key}"
-      else
-        url = "#{@uploader.server_url}/#{key}"
-      end
+      url = "#{@uploader.share_server_url}/share/#{key}"
       # And write data out
       if STDOUT.tty?
         STDOUT.puts url

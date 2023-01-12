@@ -4,20 +4,27 @@ require 'uri'
 
 module Haste
 
-  DEFAULT_URL = 'https://hastebin.com'
+  SERVER_URL = 'https://hastebin.com'
+  SHARE_SERVER_URL = 'https://hastebin.com'
 
   class Uploader
 
-    attr_reader :server_url, :server_user, :server_pass, :ssl_certs
+    attr_reader :server_url, :server_token, :share_server_url, :server_user, :server_pass, :ssl_certs
 
-    def initialize(server_url = nil, server_user = nil, server_pass = nil, ssl_certs = nil)
-      @server_url = server_url || Haste::DEFAULT_URL
-      @server_url = @server_url.dup
-      @server_url = @server_url.chop if @server_url.end_with?('/')
-
+    def initialize(server_url = nil, server_token = nil, share_server_url = nil, server_user = nil, server_pass = nil, ssl_certs = nil)
+      @server_url = generate_url(server_url || Haste::SERVER_URL)
+      @share_server_url = generate_url(share_server_url || Haste::SHARE_SERVER_URL)
+      
       @server_user = server_user
+      @server_token = server_token
       @server_pass = server_pass
       @ssl_certs   = ssl_certs
+    end
+
+    def generate_url(url)
+      url = url.dup
+      url = url.chop if url.end_with?('/')
+      return url
     end
 
     # Take in a path and return a key
@@ -76,6 +83,7 @@ module Haste
     end
 
     def connection_config(config)
+      config.request :authorization, 'Bearer', @server_token if @server_token
       config.basic_auth(@server_user, @server_pass) if @server_user
       config.adapter Faraday.default_adapter
     end
