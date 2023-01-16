@@ -2,7 +2,7 @@
 
 Haste-client is a simple client for uploading data to `Haste` server.  All you need to do is to pipe data in STDIN:
 
-`cat file | haste`
+`cat file | HASTE_SERVER_TOKEN=mytoken haste`
 
 And once the output makes it to the server, it will print the `Haste` share page URL to STDOUT.
 
@@ -24,12 +24,12 @@ gem install haste
 Most of the configuration is controlled by env variables. Here is the all environment variables that you can use.
 
 ```
-HASTE_SERVER
-HASTE_SERVER_TOKEN
-HASTE_SHARE_SERVER
-HASTE_USER
-HASTE_PASS
-HASTE_SSL_CERTS
+HASTE_SERVER: Haste server domain url
+HASTE_SERVER_TOKEN: Github authentication token
+HASTE_SHARE_SERVER: Haste share server domain url
+HASTE_USER: Basic authentication user name
+HASTE_PASS: Basic authentication user pass
+HASTE_SSL_CERTS: SSL certs path
 ```
 
 To add these environment variables, you should simply add them to your ~.bash_profile:
@@ -41,12 +41,18 @@ export VARIABLE="value"
 ### Authentication
 
 If you are using default `HASTE_SERVER`, you need to have an GitHub authentication token.
-You can get the information about authentication and how to generate token here. `https://www.toptal.com/developers/hastebin/documentation` 
+You can get the information about authentication and how to generate token [here](https://www.toptal.com/developers/hastebin/documentation)
 
 After you have generated your token, you should add it to your ~.bash_profile:
 
 ```bash
 export HASTE_SERVER_TOKEN="mytoken"
+```
+
+or you can add token to your command:
+
+```bash
+cat file | HASTE_SERVER_TOKEN=mytoken haste`
 ```
 
 If your `Haste` installation requires http authentication, add the following to your ~.bash_profile:
@@ -62,39 +68,26 @@ if you are using SSL, you will need to supply your certs path
 export HASTE_SSL_CERTS="/System/Library/OpenSSL/certs"
 ```
 
-
-
 ## Usage
 
 If you supply a valid file path as an argument to the client, it will be uploaded:
 
-``` bash
+```bash
 # equivalent
 cat file | haste
 haste file
 ```
 
-### Share page
-
-Once you have run `haste` command and your bin is uploaded, `Haste` share page URL will be printed to STDOUT.
-
-In share page:
-
-- You can see the content of the bin
-- You can download bin as a raw file
-- You can create a new bin
-- You can duplicate the bin
-
+### Different Haste server
 
 By default, `Haste` share page will point at `https://hastebin.com`. 
-You can change this by setting the value of `ENV['HASTE_SHARE_SERVER']` to the URL of your `Haste` server.  
+If you have haste-server configured to serve bins on a separate domain, you also need to set ENV['HASTE_SHARE_SERVER'] value to that domain.
 
 To set the value of share server, you can add the following to your ~.bash_profile:
 
 ```bash
 export HASTE_SHARE_SERVER="myshareserver"
 ```
-
 
 ### Different Haste server
 
