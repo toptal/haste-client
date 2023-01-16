@@ -40,10 +40,10 @@ export VARIABLE="value"
 
 ### Authentication
 
-If you are using default `HASTE_SERVER`, you need to have an authentication token. 
+If you are using default `HASTE_SERVER`, you need to have an GitHub authentication token.
 You can get the information about authentication and how to generate token here. `https://www.toptal.com/developers/hastebin/documentation` 
 
-After you have generated your token, you should add the token to your ~.bash_profile:
+After you have generated your token, you should add it to your ~.bash_profile:
 
 ```bash
 export HASTE_SERVER_TOKEN="mytoken"
