@@ -8,15 +8,17 @@ Describe the changes and motivations for the pull request, unless obvious from t
 
 ### How to test
 
-- `yarn`
+- `bundle install`
 - FIXME: Add the steps describing how to test your changes manually
 
 ### Environment variables
 
-You should add the following to your ~.bash_profile:
+Include a snapshot of the ENV vars used in your local env when this PR was created.
 
-```bash
-export ENV_VAR="value"
+```
+PUBLIC_ENV_VAR=public-value
+GLOBAL_SECRET_ENV_VAR=xxx # Added in 1Password in Shared-Utilities-Environment group
+OWN_PRIVATE_ENV_VAR # Different for everyone
 ```
 
 ### Acceptance Criteria
