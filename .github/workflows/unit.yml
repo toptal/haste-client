@@ -1,0 +1,28 @@
+name: Unit
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: 
+      - UTI-2583--adapt-haste-client-to-new-api
+
+jobs:
+  unit_tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+
+      - name: Run bundle install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Build and test with rspec
+        run: bundle exec rspec spec
