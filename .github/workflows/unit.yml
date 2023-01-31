@@ -4,8 +4,7 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: 
-      - no-jira-update-hastebin-urls
+    branches: [no-jira-update-hastebin-urls]
 
 jobs:
   unit_tests:
