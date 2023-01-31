@@ -4,8 +4,8 @@ require 'uri'
 
 module Haste
 
-  DEFAULT_SERVER_URL = 'https://new.hastebin.com'
-  DEFAULT_SHARE_SERVER_URL = 'https://new.hastebin.com'
+  DEFAULT_SERVER_URL = 'https://hastebin.com'
+  DEFAULT_SHARE_SERVER_URL = 'https://hastebin.com'
 
   class Uploader
 

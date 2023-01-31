@@ -4,8 +4,6 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: 
-      - UTI-2583--adapt-haste-client-to-new-api
 
 jobs:
   unit_tests:
@@ -14,15 +12,16 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 3.0.0
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0' 
+        bundler-cache: true
 
-      - name: Run bundle install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+    - name: Run bundle install
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
 
-      - name: Build and test with rspec
-        run: bundle exec rspec spec
+    - name: Build and test with rspec
+      run: bundle exec rspec spec

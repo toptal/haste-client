@@ -131,4 +131,4 @@ uploader.upload_path '/tmp/whaaaa' # key
 
 ## Contributor License Agreement
 
-Licensed under the [MIT](https://github.com/toptal/haste-client/blob/main/LICENSE.txt 'https://github.com/toptal/haste-client/blob/main/LICENSE.txt') license.
+Licensed under the [MIT](https://github.com/toptal/haste-client/blob/master/LICENSE.txt 'https://github.com/toptal/haste-client/blob/main/LICENSE.txt') license.
